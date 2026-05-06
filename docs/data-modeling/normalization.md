@@ -62,6 +62,8 @@ In a warehouse, you typically **denormalize on purpose**:
 - **Snowflake schema** — like star, but dimensions are themselves normalized into sub-dimensions.
 - **One Big Table (OBT)** — fully flat, often used in BI tools and modern lakehouses.
 
+> Long-form on these three: [Star vs Snowflake](./star-vs-snowflake) — including grain, conformed dimensions, and when OBT actually wins.
+
 ```mermaid
 flowchart LR
     subgraph "Star schema"

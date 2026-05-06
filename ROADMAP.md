@@ -31,13 +31,13 @@ Ordre recommandé, max ROI :
 2. [x] ⭐ `docs/storage/parquet-and-formats.md` — columnar, row groups, predicate pushdown, compression
 3. [x] ⭐ `docs/storage/iceberg-vs-delta.md` — Iceberg vs Delta vs Hudi, choix d'archi
 4. [x] ⭐ `docs/data-pipeline/cdc.md` — log-based vs trigger-based, Debezium, schema drift
-5. [ ] ⭐ `docs/quality/idempotency-and-backfills.md` — cœur du métier, déjà référencé partout
+5. [x] ⭐ `docs/quality/idempotency-and-backfills.md` — cœur du métier, déjà référencé partout
 
 ---
 
 ## 📚 Data Modeling (compléter la section existante)
 
-- [ ] ⭐ `docs/data-modeling/star-vs-snowflake.md` — schémas, tradeoffs, exemples
+- [x] ⭐ `docs/data-modeling/star-vs-snowflake.md` — schémas, tradeoffs, exemples
 - [ ] ⭐ `docs/data-modeling/fact-table-types.md` — transactional, periodic snapshot, accumulating snapshot, factless
 - [ ] `docs/data-modeling/surrogate-vs-natural-keys.md` — court, évite des erreurs grossières
 - [ ] `docs/data-modeling/one-big-table.md` — pattern moderne (BI, lakehouse)
@@ -71,7 +71,7 @@ Ordre recommandé, max ROI :
 ## ✅ Data Quality & Reliability (nouvelle section)
 
 - [ ] ⭐ `docs/quality/data-contracts.md` — sujet chaud, "senior-flavored"
-- [ ] ⭐ `docs/quality/idempotency-and-backfills.md` — déjà référencé partout
+- [x] ⭐ `docs/quality/idempotency-and-backfills.md` — déjà référencé partout
 - [ ] `docs/quality/testing-frameworks.md` — dbt tests vs Great Expectations vs Soda
 - [ ] `docs/quality/slas-and-freshness.md` — SLA/SLO pour la data
 - [ ] `docs/quality/lineage-and-observability.md` — OpenLineage, Marquez, Monte Carlo

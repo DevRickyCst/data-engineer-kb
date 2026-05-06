@@ -8,7 +8,7 @@ const sidebars = {
       type: 'category',
       label: 'Data Modeling',
       collapsed: false,
-      items: ['data-modeling/scd', 'data-modeling/normalization'],
+      items: ['data-modeling/scd', 'data-modeling/normalization', 'data-modeling/star-vs-snowflake'],
     },
     {
       type: 'category',
@@ -34,6 +34,12 @@ const sidebars = {
         'data-pipeline/kafka',
         'data-pipeline/cdc',
       ],
+    },
+    {
+      type: 'category',
+      label: 'Quality & Reliability',
+      collapsed: false,
+      items: ['quality/idempotency-and-backfills'],
     },
   ],
 
