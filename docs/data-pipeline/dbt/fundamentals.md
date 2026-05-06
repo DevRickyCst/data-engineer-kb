@@ -1,5 +1,5 @@
 ---
-id: dbt-fundamentals
+id: fundamentals
 title: dbt — Fundamentals
 sidebar_label: Fundamentals
 description: Ce qu'est dbt, comment structurer un projet, tests et lineage.
@@ -101,8 +101,8 @@ Comment dbt matérialise un model dans le warehouse :
 | `view`          | `CREATE OR REPLACE VIEW`                              | Défaut. Logique légère, source toujours fraîche.                  |
 | `table`         | `CREATE OR REPLACE TABLE` (recompute complet)         | Calculs lourds, ou queries fréquentes sur peu de données.         |
 | `ephemeral`     | Inline CTE — pas matérialisé                          | Helper réutilisé dans 2-3 models, sans intérêt à exposer.         |
-| `incremental`   | Insère/merge uniquement les nouveaux rows             | Gros fact tables append-only. **Voir [dbt advanced](./dbt-advanced).** |
-| `snapshot`      | Type-2 SCD géré par dbt                               | Tracker l'historique d'une dimension. **Voir [dbt advanced](./dbt-advanced).** |
+| `incremental`   | Insère/merge uniquement les nouveaux rows             | Gros fact tables append-only. **Voir [dbt advanced](./advanced).** |
+| `snapshot`      | Type-2 SCD géré par dbt                               | Tracker l'historique d'une dimension. **Voir [dbt advanced](./advanced).** |
 
 Définition au niveau du model :
 
@@ -250,4 +250,4 @@ Pour aller plus loin :
 
 Une fois ces fondamentaux acquis, deux patterns sont **incontournables en production** : les modèles incrémentaux (pour ne pas reprocesser 2 ans de fact_orders chaque nuit) et les snapshots (pour tracker l'historique des dimensions).
 
-→ Voir **[dbt — Patterns avancés](./dbt-advanced)**.
+→ Voir **[dbt — Patterns avancés](./advanced)**.

@@ -474,4 +474,4 @@ If the sink is HTTP, an external cache, or any non-transactional system — assu
 - Pages liées :
   - [Kafka](./kafka) — the bus most CDC pipelines run on.
   - [Iceberg vs Delta](../storage/iceberg-vs-delta) — table formats that absorb schema drift gracefully.
-  - [dbt advanced — incremental models](./dbt-advanced) — the warehouse-side companion to a CDC ingest.
+  - [dbt advanced — incremental models](./dbt/advanced) — the warehouse-side companion to a CDC ingest.

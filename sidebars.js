@@ -27,8 +27,8 @@ const sidebars = {
           label: 'dbt',
           collapsed: true,
           items: [
-            'data-pipeline/dbt-fundamentals',
-            'data-pipeline/dbt-advanced',
+            'data-pipeline/dbt/fundamentals',
+            'data-pipeline/dbt/advanced',
           ],
         },
         'data-pipeline/kafka',

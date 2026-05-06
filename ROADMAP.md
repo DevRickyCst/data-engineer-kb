@@ -26,8 +26,8 @@ Légende statut :
 
 Ordre recommandé, max ROI :
 
-1. [x] ⭐ `docs/data-pipeline/dbt-fundamentals.md` — structure, materializations, tests, lineage
-1. [x] ⭐ `docs/data-pipeline/dbt-advanced.md` — incremental models, snapshots, macros
+1. [x] ⭐ `docs/data-pipeline/dbt/fundamentals.md` — structure, materializations, tests, lineage
+1. [x] ⭐ `docs/data-pipeline/dbt/advanced.md` — incremental models, snapshots, macros
 2. [x] ⭐ `docs/storage/parquet-and-formats.md` — columnar, row groups, predicate pushdown, compression
 3. [x] ⭐ `docs/storage/iceberg-vs-delta.md` — Iceberg vs Delta vs Hudi, choix d'archi
 4. [x] ⭐ `docs/data-pipeline/cdc.md` — log-based vs trigger-based, Debezium, schema drift
@@ -54,7 +54,7 @@ Ordre recommandé, max ROI :
 
 ## ⚙️ Pipelines (compléter la section)
 
-- [x] ⭐ `docs/data-pipeline/dbt-fundamentals.md` + `docs/data-pipeline/dbt-advanced.md`
+- [x] ⭐ `docs/data-pipeline/dbt/fundamentals.md` + `docs/data-pipeline/dbt/advanced.md`
 - [x] ⭐ `docs/data-pipeline/cdc.md` — Debezium, log-based vs trigger-based
 - [ ] ⭐ `docs/pipeline/etl-vs-elt.md` — court mais cadre tout
 - [ ] `docs/pipeline/spark-fundamentals.md` — shuffles, broadcast joins, skew

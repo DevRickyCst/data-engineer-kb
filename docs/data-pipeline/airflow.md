@@ -121,4 +121,4 @@ For backfills to work, **every task must be idempotent and parameterized on `log
 
 - **Real-time / sub-minute** workloads → use Kafka + a stream processor.
 - **Simple cron** with no dependencies → cron + a healthcheck is fine.
-- **Pure [dbt](./dbt-fundamentals) project** → `dbt-cloud` or a thin scheduler may be enough.
+- **Pure [dbt](./dbt/fundamentals) project** → `dbt-cloud` or a thin scheduler may be enough.

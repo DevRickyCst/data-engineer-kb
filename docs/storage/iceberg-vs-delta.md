@@ -278,4 +278,4 @@ flowchart TD
 - Pages liées :
   - [Parquet & formats](./parquet-and-formats) — la couche en dessous.
   - [SCD](../data-modeling/scd) — Type-2 SCD est trivial avec un table format (vs gymnastique sans).
-  - [dbt advanced](../data-pipeline/dbt-advanced) — dbt-iceberg / dbt-databricks utilisent ces formats sous le capot.
+  - [dbt advanced](../data-pipeline/dbt/advanced) — dbt-iceberg / dbt-databricks utilisent ces formats sous le capot.

@@ -1,5 +1,5 @@
 ---
-id: dbt-advanced
+id: advanced
 title: dbt — Patterns avancés
 sidebar_label: Advanced
 description: Incremental models, snapshots Type-2, macros — les patterns critiques en production.
@@ -7,7 +7,7 @@ description: Incremental models, snapshots Type-2, macros — les patterns criti
 
 # dbt — Patterns avancés
 
-Suppose que tu as lu **[dbt fundamentals](./dbt-fundamentals)**. On attaque ici les trois patterns qui séparent un projet jouet d'un projet de production : **incremental models**, **snapshots**, **macros & packages**.
+Suppose que tu as lu **[dbt fundamentals](./fundamentals)**. On attaque ici les trois patterns qui séparent un projet jouet d'un projet de production : **incremental models**, **snapshots**, **macros & packages**.
 
 ---
 
@@ -108,7 +108,7 @@ flowchart TD
 
 ## Snapshots
 
-Les snapshots sont l'implémentation **Type-2 SCD** (cf. [SCD](../data-modeling/scd)) gérée par dbt. Chaque changement détecté sur une dimension crée un nouveau row avec `dbt_valid_from` / `dbt_valid_to`.
+Les snapshots sont l'implémentation **Type-2 SCD** (cf. [SCD](../../data-modeling/scd)) gérée par dbt. Chaque changement détecté sur une dimension crée un nouveau row avec `dbt_valid_from` / `dbt_valid_to`.
 
 ### Stratégies
 
@@ -274,6 +274,6 @@ from {{ ref('stg_orders') }}
 
 - **Doc officielle dbt** — [Incremental models](https://docs.getdbt.com/docs/build/incremental-models), [Snapshots](https://docs.getdbt.com/docs/build/snapshots).
 - Pages liées dans cette base :
-  - [SCD](../data-modeling/scd) — la théorie derrière les snapshots.
-  - [Airflow](./airflow) — orchestrer `dbt run` et `dbt snapshot`.
-  - [Data Engineer interview](../interview/data-engineer) — Q3 cite explicitement ces patterns.
+  - [SCD](../../data-modeling/scd) — la théorie derrière les snapshots.
+  - [Airflow](../airflow) — orchestrer `dbt run` et `dbt snapshot`.
+  - [Data Engineer interview](../../interview/data-engineer) — Q3 cite explicitement ces patterns.

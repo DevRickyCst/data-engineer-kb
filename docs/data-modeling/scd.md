@@ -213,4 +213,4 @@ flowchart TD
 
 - Ralph Kimball, *The Data Warehouse Toolkit* — the canonical reference.
 - [dbt snapshots](https://docs.getdbt.com/docs/build/snapshots) — practical Type-2 implementation.
-- [dbt — Patterns avancés](../data-pipeline/dbt-advanced#snapshots) — implémentation Type-2 côté dbt, en interne à cette base.
+- [dbt — Patterns avancés](../data-pipeline/dbt/advanced#snapshots) — implémentation Type-2 côté dbt, en interne à cette base.
