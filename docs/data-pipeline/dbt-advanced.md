@@ -1,7 +1,7 @@
 ---
 id: dbt-advanced
 title: dbt — Patterns avancés
-sidebar_label: dbt advanced
+sidebar_label: Advanced
 description: Incremental models, snapshots Type-2, macros — les patterns critiques en production.
 ---
 

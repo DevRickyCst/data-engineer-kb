@@ -22,8 +22,15 @@ const sidebars = {
       collapsed: false,
       items: [
         'data-pipeline/airflow',
-        'data-pipeline/dbt-fundamentals',
-        'data-pipeline/dbt-advanced',
+        {
+          type: 'category',
+          label: 'dbt',
+          collapsed: true,
+          items: [
+            'data-pipeline/dbt-fundamentals',
+            'data-pipeline/dbt-advanced',
+          ],
+        },
         'data-pipeline/kafka',
         'data-pipeline/cdc',
       ],

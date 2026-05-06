@@ -1,7 +1,7 @@
 ---
 id: dbt-fundamentals
 title: dbt — Fundamentals
-sidebar_label: dbt fundamentals
+sidebar_label: Fundamentals
 description: Ce qu'est dbt, comment structurer un projet, tests et lineage.
 ---
 
