@@ -1,0 +1,115 @@
+# 🗺️ Roadmap — pages à ajouter
+
+Liste des pages envisagées pour étoffer la knowledge base.
+On coche au fur et à mesure. ⭐ = haute priorité (interview + quotidien).
+
+Légende statut :
+- `[ ]` à faire
+- `[~]` en cours
+- `[x]` fait
+
+---
+
+## ✅ Déjà en place
+
+- [x] `docs/intro.md`
+- [x] `docs/data-modeling/scd.md`
+- [x] `docs/data-modeling/normalization.md`
+- [x] `docs/data-pipeline/airflow.md`
+- [x] `docs/data-pipeline/kafka.md`
+- [x] `docs/interview/data-engineer.md`
+- [x] `docs/interview/system-design.md`
+
+---
+
+## 🎯 Top 5 à attaquer en premier
+
+Ordre recommandé, max ROI :
+
+1. [x] ⭐ `docs/data-pipeline/dbt-fundamentals.md` — structure, materializations, tests, lineage
+1. [x] ⭐ `docs/data-pipeline/dbt-advanced.md` — incremental models, snapshots, macros
+2. [x] ⭐ `docs/storage/parquet-and-formats.md` — columnar, row groups, predicate pushdown, compression
+3. [x] ⭐ `docs/storage/iceberg-vs-delta.md` — Iceberg vs Delta vs Hudi, choix d'archi
+4. [x] ⭐ `docs/data-pipeline/cdc.md` — log-based vs trigger-based, Debezium, schema drift
+5. [ ] ⭐ `docs/quality/idempotency-and-backfills.md` — cœur du métier, déjà référencé partout
+
+---
+
+## 📚 Data Modeling (compléter la section existante)
+
+- [ ] ⭐ `docs/data-modeling/star-vs-snowflake.md` — schémas, tradeoffs, exemples
+- [ ] ⭐ `docs/data-modeling/fact-table-types.md` — transactional, periodic snapshot, accumulating snapshot, factless
+- [ ] `docs/data-modeling/surrogate-vs-natural-keys.md` — court, évite des erreurs grossières
+- [ ] `docs/data-modeling/one-big-table.md` — pattern moderne (BI, lakehouse)
+- [ ] `docs/data-modeling/data-vault.md` — Data Vault 2.0 (optionnel, plutôt finance/assurance)
+- [ ] `docs/data-modeling/bitemporal.md` — valid-time vs transaction-time (avancé)
+
+## 💾 Storage / Lakehouse (nouvelle section)
+
+- [x] ⭐ `docs/storage/parquet-and-formats.md` — Parquet, ORC, Avro
+- [x] ⭐ `docs/storage/iceberg-vs-delta.md` — Iceberg vs Delta vs Hudi
+- [ ] `docs/storage/partitioning-clustering-bucketing.md` — les trois leviers
+- [ ] `docs/storage/file-size-and-compaction.md` — small files problem
+- [ ] `docs/storage/object-storage-basics.md` — S3/GCS, eventual consistency, listing cost
+
+## ⚙️ Pipelines (compléter la section)
+
+- [x] ⭐ `docs/data-pipeline/dbt-fundamentals.md` + `docs/data-pipeline/dbt-advanced.md`
+- [x] ⭐ `docs/data-pipeline/cdc.md` — Debezium, log-based vs trigger-based
+- [ ] ⭐ `docs/pipeline/etl-vs-elt.md` — court mais cadre tout
+- [ ] `docs/pipeline/spark-fundamentals.md` — shuffles, broadcast joins, skew
+- [ ] `docs/pipeline/flink.md` — alternative streaming à Kafka Streams
+- [ ] `docs/pipeline/orchestrators-comparison.md` — Airflow vs Dagster vs Prefect
+
+## 🌊 Streaming (nouvelle section)
+
+- [ ] ⭐ `docs/streaming/lambda-vs-kappa.md` — architectures classiques
+- [ ] ⭐ `docs/streaming/event-time-watermarks.md` — la chose que tout le monde rate
+- [ ] `docs/streaming/exactly-once-end-to-end.md` — vraie garantie de bout en bout
+- [ ] `docs/streaming/event-sourcing-cqrs.md` — utile, plus côté backend
+
+## ✅ Data Quality & Reliability (nouvelle section)
+
+- [ ] ⭐ `docs/quality/data-contracts.md` — sujet chaud, "senior-flavored"
+- [ ] ⭐ `docs/quality/idempotency-and-backfills.md` — déjà référencé partout
+- [ ] `docs/quality/testing-frameworks.md` — dbt tests vs Great Expectations vs Soda
+- [ ] `docs/quality/slas-and-freshness.md` — SLA/SLO pour la data
+- [ ] `docs/quality/lineage-and-observability.md` — OpenLineage, Marquez, Monte Carlo
+
+## 🏎️ Warehouse & Performance (nouvelle section)
+
+- [ ] ⭐ `docs/warehouse/query-optimization.md` — EXPLAIN, predicate pushdown, scan vs seek
+- [ ] `docs/warehouse/cost-models.md` — BigQuery vs Snowflake vs Databricks
+- [ ] `docs/warehouse/window-functions-advanced.md` — gaps & islands, dedupe, sessionization
+
+## 🛡️ Governance & Org (plus senior)
+
+- [ ] `docs/governance/gdpr-on-lakes.md` — right-to-erasure sur columnar
+- [ ] `docs/governance/data-mesh.md` — buzzword mais demandé
+- [ ] `docs/governance/reverse-etl.md` — complète le tableau
+
+## 🎯 Interview (compléter)
+
+- [ ] ⭐ `docs/interview/sql-patterns.md` — dedupe, top-N par groupe, gaps & islands, sessionization
+- [ ] ⭐ `docs/interview/data-engineer-part2.md` — 3 nouveaux Q&A : CDC, exactly-once, "debug pipeline lent"
+- [ ] `docs/interview/behavioral.md` — incidents, tradeoffs, mentoring (senior+)
+- [ ] `docs/interview/system-design-cases.md` — 3-4 cas pratiques détaillés
+
+---
+
+## 🚀 Bonus / nice-to-have
+
+- [ ] `docs/ml/feature-stores.md` — Feast, Tecton, online vs offline
+- [ ] `docs/tools/duckdb.md` — outil qui monte, pratique en local
+- [ ] `.github/workflows/deploy.yml` — déploiement S3 + CloudFront
+- [ ] Plugin de **search local** (`@easyops-cn/docusaurus-search-local`)
+- [ ] Page `/about` ou `/contact`
+
+---
+
+## 📋 Notes
+
+- Garder le format des pages cohérent : intro courte → concepts → exemples (SQL/code/Mermaid) → pros/cons → pitfalls → follow-up
+- Toujours inclure au moins un diagramme Mermaid quand ça aide
+- Les exemples SQL sont en ANSI sauf mention contraire
+- Les Q&A interview gardent le format Junior / Mid / Senior + Pitfalls + Follow-ups

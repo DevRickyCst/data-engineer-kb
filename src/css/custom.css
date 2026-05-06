@@ -1,0 +1,133 @@
+/**
+ * Custom styles for Data Engineer Knowledge Base.
+ * Uses Infima (Docusaurus' built-in CSS framework). Override CSS variables
+ * here rather than rewriting selectors so updates stay forward-compatible.
+ */
+
+:root {
+  --ifm-color-primary: #2e7be3;
+  --ifm-color-primary-dark: #1f6cd0;
+  --ifm-color-primary-darker: #1d66c4;
+  --ifm-color-primary-darkest: #1853a1;
+  --ifm-color-primary-light: #4a8ee6;
+  --ifm-color-primary-lighter: #5896e7;
+  --ifm-color-primary-lightest: #7eaeec;
+
+  --ifm-code-font-size: 95%;
+  --ifm-font-family-base:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Helvetica Neue', sans-serif;
+  --ifm-heading-font-weight: 700;
+  --ifm-line-height-base: 1.7;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.08);
+}
+
+/* Dark mode tuning — softer background, higher-contrast text */
+[data-theme='dark'] {
+  --ifm-color-primary: #6aa9ff;
+  --ifm-color-primary-dark: #4a93ff;
+  --ifm-color-primary-darker: #3a89ff;
+  --ifm-color-primary-darkest: #1271ff;
+  --ifm-color-primary-light: #8abeff;
+  --ifm-color-primary-lighter: #9ac8ff;
+  --ifm-color-primary-lightest: #c3deff;
+
+  --ifm-background-color: #0e1116;
+  --ifm-background-surface-color: #161b22;
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+}
+
+/* Slightly tighter prose for long-form reading */
+.markdown > h1 {
+  font-size: 2.4rem;
+  margin-top: 0.5rem;
+}
+
+.markdown > h2 {
+  font-size: 1.7rem;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+  padding-bottom: 0.3rem;
+}
+
+.markdown > h3 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+article blockquote {
+  border-left: 4px solid var(--ifm-color-primary);
+  background: var(--ifm-background-surface-color);
+}
+
+/* Homepage hero */
+.hero--data-eng {
+  background: linear-gradient(135deg, #0e1116 0%, #1a2332 100%);
+  color: #fff;
+  padding: 5rem 0 4rem;
+}
+
+.hero--data-eng .hero__title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hero--data-eng .hero__subtitle {
+  font-size: 1.25rem;
+  opacity: 0.85;
+}
+
+/* Cards on the homepage */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.feature-card {
+  padding: 1.5rem;
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card h3 {
+  margin-top: 0;
+}
+
+/* Mermaid — let diagrams blend with the page background instead of
+   showing the default theme canvas (which renders too light in dark mode). */
+.docusaurus-mermaid-container {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.docusaurus-mermaid-container svg {
+  background: transparent !important;
+  max-width: 100%;
+  height: auto;
+}
+
+[data-theme='dark'] .docusaurus-mermaid-container {
+  background: var(--ifm-background-color);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+[data-theme='light'] .docusaurus-mermaid-container {
+  background: #f6f8fa;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 1rem;
+}
