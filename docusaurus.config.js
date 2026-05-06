@@ -61,6 +61,12 @@ const config = {
         disableSwitch: false,
         respectPrefersColorScheme: true,
       },
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: false,
+        },
+      },
       navbar: {
         title: 'Data Eng KB',
         logo: {
