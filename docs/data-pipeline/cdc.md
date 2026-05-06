@@ -306,7 +306,7 @@ If the sink is HTTP, an external cache, or any non-transactional system — assu
 - **Schema Registry set to `NONE`.** Looks like it works. Garbage propagates the day someone runs an `ALTER TABLE`.
 - **Naive `MERGE` for every event.** A 1B-row fact table with row-by-row merges costs more than the source DB. Batch by event time, partition the sink, write only affected partitions.
 - **Routing all CDC topics through one Kafka consumer.** When one topic spikes (snapshot of a big table), it head-of-line-blocks every other table. Group consumers by domain, not by convenience.
-- **Mixing CDC + manual backfills against the same sink table** without a tie-breaker (LSN, transaction id). The backfill silently overwrites newer rows.
+- **Mixing CDC + manual backfills against the same sink table** without a tie-breaker (LSN, transaction id). The backfill silently overwrites newer rows. See [Idempotency & Backfills](../quality/idempotency-and-backfills) for the safe replay pattern.
 
 ---
 

@@ -188,7 +188,7 @@ You can read these top-down to study, or pick a level and rehearse out loud.
 - Soft-deleting in the source but not capturing it → orphan rows in the warehouse forever.
 - Putting business logic in Airflow `PythonOperator`s instead of SQL/dbt → no lineage, no tests, hard to audit.
 - "We'll add data quality later" → there is no later.
-- Skipping idempotency, then realizing a backfill double-counts revenue.
+- Skipping idempotency, then realizing a backfill double-counts revenue. (Long-form: [Idempotency & Backfills](../quality/idempotency-and-backfills).)
 
 ### Follow-up questions
 

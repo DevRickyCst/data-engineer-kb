@@ -100,7 +100,7 @@ flowchart TD
 
 - **`unique_key` manquant** sur stratégie `merge` → doublons silencieux à chaque run d'overlap.
 - **Filtre `is_incremental()` sans overlap** → late-arriving events perdus définitivement.
-- **`current_timestamp()` / `now()` dans le SELECT** → sortie non-déterministe ; un backfill ne reproduit pas le passé.
+- **`current_timestamp()` / `now()` dans le SELECT** → sortie non-déterministe ; un backfill ne reproduit pas le passé. Voir [Idempotency & Backfills](../../quality/idempotency-and-backfills) pour le pattern complet.
 - **Changement de schéma sans `on_schema_change`** → la nouvelle colonne reste vide pour tous les rows historiques. Penser `append_new_columns` ou `sync_all_columns`.
 - **Filtrer sur `ingestion_date` au lieu de `event_time`** quand les consommateurs querient par event_time → partition pruning cassé côté warehouse.
 
