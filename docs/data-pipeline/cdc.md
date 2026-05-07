@@ -243,7 +243,7 @@ MySQL and SQL Server emit DDL events natively — they're easier here.
 
 Even if your pipeline is well-behaved, the **sink** has to absorb the new column. With:
 
-- **Iceberg / Delta** — schema evolution is native. Add a column and `MERGE` keeps working. See [Iceberg vs Delta](../storage/iceberg-vs-delta).
+- **Iceberg / Delta** — schema evolution is native. Add a column and `MERGE` keeps working. See [Iceberg vs Delta vs Hudi](../lakehouse/table-formats-comparison).
 - **Plain Parquet on Hive** — additive changes work; renames and type changes mean rewriting partitions.
 - **Snowflake / BigQuery** — additive changes work via `ALTER TABLE`; schema-on-read tools like `INFER_SCHEMA` help bootstrap.
 - **A typed Python consumer** — your code crashes the moment a new field appears. Generated classes (Avro / Protobuf compiled) at least crash loudly.
@@ -473,5 +473,6 @@ If the sink is HTTP, an external cache, or any non-transactional system — assu
 - **Martin Kleppmann**, *Designing Data-Intensive Applications* — chapter 11 covers CDC patterns at the conceptual level; still the best long-form treatment.
 - Pages liées :
   - [Kafka](./kafka) — the bus most CDC pipelines run on.
-  - [Iceberg vs Delta](../storage/iceberg-vs-delta) — table formats that absorb schema drift gracefully.
+  - [Iceberg vs Delta vs Hudi](../lakehouse/table-formats-comparison) — table formats that absorb schema drift gracefully.
+  - [Apache Hudi](../lakehouse/hudi) — the most CDC-friendly of the three.
   - [dbt advanced — incremental models](./dbt/advanced) — the warehouse-side companion to a CDC ingest.

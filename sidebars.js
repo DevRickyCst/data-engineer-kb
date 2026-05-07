@@ -6,15 +6,32 @@ const sidebars = {
     'intro',
     {
       type: 'category',
+      label: 'Fundamentals',
+      collapsed: false,
+      items: ['fundamentals/olap-vs-oltp'],
+    },
+    {
+      type: 'category',
       label: 'Data Modeling',
       collapsed: false,
       items: ['data-modeling/scd', 'data-modeling/normalization', 'data-modeling/star-vs-snowflake'],
     },
     {
       type: 'category',
-      label: 'Storage / Lakehouse',
+      label: 'Storage',
       collapsed: false,
-      items: ['storage/parquet-and-formats', 'storage/iceberg-vs-delta'],
+      items: ['storage/parquet-and-formats'],
+    },
+    {
+      type: 'category',
+      label: 'Lakehouse',
+      collapsed: false,
+      items: [
+        'lakehouse/table-formats-comparison',
+        'lakehouse/iceberg',
+        'lakehouse/delta-lake',
+        'lakehouse/hudi',
+      ],
     },
     {
       type: 'category',

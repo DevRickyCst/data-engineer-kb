@@ -245,5 +245,6 @@ filtered = pq.read_table(
 - [Parquet specification](https://parquet.apache.org/docs/file-format/) — la source.
 - [Apache Arrow](https://arrow.apache.org/) — modèle mémoire columnar partagé entre frameworks.
 - Pages liées :
-  - [Iceberg vs Delta](./iceberg-vs-delta) (à venir) — couches table format au-dessus de Parquet.
+  - [Iceberg vs Delta vs Hudi](../lakehouse/table-formats-comparison) — table formats au-dessus de Parquet.
+  - [Apache Iceberg](../lakehouse/iceberg), [Delta Lake](../lakehouse/delta-lake), [Apache Hudi](../lakehouse/hudi) — deep dives par format.
   - [Kafka](../data-pipeline/kafka) — où Avro est roi.

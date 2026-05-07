@@ -29,11 +29,17 @@ Ordre recommandé, max ROI :
 1. [x] ⭐ `docs/data-pipeline/dbt/fundamentals.md` — structure, materializations, tests, lineage
 1. [x] ⭐ `docs/data-pipeline/dbt/advanced.md` — incremental models, snapshots, macros
 2. [x] ⭐ `docs/storage/parquet-and-formats.md` — columnar, row groups, predicate pushdown, compression
-3. [x] ⭐ `docs/storage/iceberg-vs-delta.md` — Iceberg vs Delta vs Hudi, choix d'archi
+3. [x] ⭐ `docs/lakehouse/{iceberg,delta-lake,hudi,table-formats-comparison}.md` — split en 4 pages dédiées
 4. [x] ⭐ `docs/data-pipeline/cdc.md` — log-based vs trigger-based, Debezium, schema drift
 5. [x] ⭐ `docs/quality/idempotency-and-backfills.md` — cœur du métier, déjà référencé partout
 
 ---
+
+## 🧱 Fundamentals
+
+- [x] ⭐ `docs/fundamentals/olap-vs-oltp.md` — workloads, storage layout, HTAP
+- [ ] ⭐ `docs/fundamentals/etl-vs-elt.md` — pattern moderne, cadrage du pipeline
+- [ ] `docs/fundamentals/batch-vs-streaming.md` — quand chacun gagne
 
 ## 📚 Data Modeling (compléter la section existante)
 
@@ -44,13 +50,19 @@ Ordre recommandé, max ROI :
 - [ ] `docs/data-modeling/data-vault.md` — Data Vault 2.0 (optionnel, plutôt finance/assurance)
 - [ ] `docs/data-modeling/bitemporal.md` — valid-time vs transaction-time (avancé)
 
-## 💾 Storage / Lakehouse (nouvelle section)
+## 💾 Storage (file formats)
 
 - [x] ⭐ `docs/storage/parquet-and-formats.md` — Parquet, ORC, Avro
-- [x] ⭐ `docs/storage/iceberg-vs-delta.md` — Iceberg vs Delta vs Hudi
 - [ ] `docs/storage/partitioning-clustering-bucketing.md` — les trois leviers
 - [ ] `docs/storage/file-size-and-compaction.md` — small files problem
 - [ ] `docs/storage/object-storage-basics.md` — S3/GCS, eventual consistency, listing cost
+
+## 🏔️ Lakehouse (table formats)
+
+- [x] ⭐ `docs/lakehouse/iceberg.md` — architecture, hidden partitioning, catalogs
+- [x] ⭐ `docs/lakehouse/delta-lake.md` — transaction log, concurrency, delta-rs, UniForm
+- [x] ⭐ `docs/lakehouse/hudi.md` — CoW vs MoR, indexes, timeline
+- [x] ⭐ `docs/lakehouse/table-formats-comparison.md` — choix Iceberg vs Delta vs Hudi
 
 ## ⚙️ Pipelines (compléter la section)
 

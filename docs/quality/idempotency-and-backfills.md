@@ -402,7 +402,7 @@ The mechanics:
 > - **At least 2x the wall-clock estimate.** Backfills always hit edge cases — a missing source partition, a type drift, a CDC slot that was paused for 3 days in 2023.
 > - **A dry run that produces sample diffs vs. existing data**, not just "it ran successfully." A successful backfill that produces wrong numbers is worse than a failed one.
 > - **Clear stop conditions.** Cost ceiling, time ceiling, output sanity check (row count within X% of expectation). Halt and review, don't blow through.
-> - **A reversible plan.** If the backfill is wrong, can we roll back to the prior state? With Iceberg/Delta time travel, yes; with a manual `INSERT OVERWRITE` on Snowflake, you'd better have a snapshot. See [Iceberg vs Delta](../storage/iceberg-vs-delta).
+> - **A reversible plan.** If the backfill is wrong, can we roll back to the prior state? With Iceberg/Delta time travel, yes; with a manual `INSERT OVERWRITE` on Snowflake, you'd better have a snapshot. See [Iceberg vs Delta vs Hudi](../lakehouse/table-formats-comparison).
 >
 > The deeper lesson I write into the post-mortem each time: **a backfill is a re-litigation of every decision the team has made about the data**. Type-1 vs Type-2, late-arriving handling, deterministic transforms — none of those are testable on a green-field daily pipeline. The backfill is where they all get cashed in.
 
@@ -497,5 +497,5 @@ The mechanics:
   - [dbt advanced — incremental models](../data-pipeline/dbt/advanced) — the warehouse-side mechanics.
   - [CDC](../data-pipeline/cdc) — the upstream source-of-truth and replay layer.
   - [SCD](../data-modeling/scd) — Type-2 dimensions are the joint partner of idempotent fact tables.
-  - [Iceberg vs Delta](../storage/iceberg-vs-delta) — table formats that make partition overwrite and time travel native.
+  - [Iceberg vs Delta vs Hudi](../lakehouse/table-formats-comparison) — table formats that make partition overwrite and time travel native.
   - [Data Engineer interview — Q3](../interview/data-engineer) — the "design a daily pipeline" answer leans heavily on these patterns.
