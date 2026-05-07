@@ -49,12 +49,9 @@ If your PK is `(order_id, product_id)`, a column like `customer_name` only depen
 
 ## OLTP vs. OLAP — different goals
 
-|                       | OLTP (transactional)                    | OLAP (analytics)                          |
-| --------------------- | --------------------------------------- | ----------------------------------------- |
-| Workload              | Many small writes / point lookups       | Few large reads / aggregations            |
-| Storage layout        | Row-oriented                            | Columnar                                  |
-| Schema                | Highly normalized (3NF)                 | **Denormalized** (star / snowflake)       |
-| Why                   | Avoid update anomalies, low latency     | Avoid joins, scan less data, fast scans   |
+The short version: **OLTP normalizes to avoid update anomalies on row-level transactions**; **OLAP denormalizes to avoid joins on full-table scans**. The two systems are tuned for opposite workloads — different storage layouts, different schema patterns, different concurrency models.
+
+> Long-form on this distinction: [OLAP vs OLTP](../fundamentals/olap-vs-oltp).
 
 In a warehouse, you typically **denormalize on purpose**:
 
