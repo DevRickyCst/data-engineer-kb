@@ -19,7 +19,7 @@ This page lays out the six dimensions that actually differ between the paradigms
 
 ### Batch — bounded data, scheduled compute
 
-* Input: a finite dataset that exists in full at job start (yesterday's events, last hour's CDC dump, a Parquet partition).
+* Input: a finite dataset that exists in full at job start (yesterday's events, last hour's <T>CDC</T> dump, a Parquet partition).
 * Compute: scheduled — every 15 min, hourly, nightly. Reads everything, transforms, writes, exits.
 * State: stateless across runs (each job starts fresh) or recovered from the previous output.
 * Engines: Spark batch, dbt, Airflow-orchestrated SQL, BigQuery scheduled queries, Snowflake tasks.
@@ -29,7 +29,7 @@ This page lays out the six dimensions that actually differ between the paradigms
 
 * Input: a never-ending sequence of events arriving over time (Kafka topic, Kinesis stream, CDC log, IoT sensors).
 * Compute: long-lived operators consuming events as they arrive, maintaining state in RocksDB / managed state.
-* State: continuously evolving — windowed aggregations, joins, sessionization. Recovered from checkpoints on failure.
+* State: continuously evolving — windowed aggregations, joins, sessionization. Recovered from <T term="checkpoint">checkpoints</T> on failure.
 * Engines: Kafka Streams, Flink, Spark Structured Streaming (micro-batch), Dataflow, Materialize, ksqlDB.
 * Latency: milliseconds (Flink, Materialize) to seconds (micro-batch).
 
@@ -104,7 +104,7 @@ That state needs to be **checkpointed durably** (Flink: Chandy-Lamport asynchron
 | **Replay cost** | Trivial (re-read source partition) | Moderate (replay from Kafka offset) to expensive (replay from cold storage) |
 | **Operational burden** | Low — `airflow tasks retry` or rerun cron | High — checkpoint compatibility, state migration, watermark drift |
 
-Batch fails **loudly and obviously** — Airflow turns the task red, you rerun it, you move on. Streaming fails **subtly** — the consumer lags, the watermark stalls, results stop updating, and unless you have lag SLOs and alerting, the dashboard goes silently stale. See [idempotency & backfills](../quality/idempotency-and-backfills) — it's a pre-requisite for streaming, not a nice-to-have.
+Batch fails **loudly and obviously** — Airflow turns the task red, you rerun it, you move on. Streaming fails **subtly** — the consumer lags, the <T>watermark</T> stalls, results stop updating, and unless you have lag SLOs and alerting, the dashboard goes silently stale. See [idempotency & backfills](../quality/idempotency-and-backfills) — it's a pre-requisite for streaming, not a nice-to-have.
 
 ### 5. Cost model
 
@@ -168,7 +168,7 @@ This pattern wins because it's **one logical pipeline, two execution modes**. Th
 
 ### Micro-batch as the pragmatic middle
 
-Spark Structured Streaming's default execution mode is micro-batch — every trigger interval (e.g. 1 second), it runs a tiny batch over the new data since the last trigger. The semantics are streaming (windows, watermarks, exactly-once), the implementation is batch.
+Spark Structured Streaming's default execution mode is micro-batch — every trigger interval (e.g. 1 second), it runs a tiny batch over the new data since the last trigger. The semantics are streaming (windows, watermarks, <T>exactly-once</T>), the implementation is batch.
 
 * Fine for latency floors of ~1 second.
 * Reuses Spark's batch optimizer and ecosystem.

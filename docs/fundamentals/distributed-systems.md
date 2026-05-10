@@ -9,7 +9,7 @@ description: Partitioning, replication, consensus, CAP, and consistency — the 
 
 Every tool a data engineer touches in 2026 — Kafka, Spark, Snowflake, BigQuery, Cassandra, Iceberg, S3, Postgres replicas — is a **distributed system**. They use different vocabularies and ship with different defaults, but they all wrestle with the same five invariants: **partitioning, replication, consensus, fault tolerance, and consistency**.
 
-Internalize those five and the systems stop looking exotic. A "Snowflake clustering key", a "Kafka partition", a "Cassandra token range", and a "Postgres logical slot" are the same idea wearing four costumes. The bugs are also the same — a stuck consumer, a stale read, a split brain, a runaway shuffle — and the diagnostic muscles transfer.
+Internalize those five and the systems stop looking exotic. A "Snowflake clustering key", a "Kafka partition", a "Cassandra token range", and a "Postgres logical slot" are the same idea wearing four costumes. The bugs are also the same — a stuck consumer, a stale read, a split brain, a runaway <T>shuffle</T> — and the diagnostic muscles transfer.
 
 This page is the mental model. It's deliberately broad; the system-specific pages ([Kafka](../data-pipeline/kafka), [Iceberg](../lakehouse/iceberg), [CDC](../data-pipeline/cdc)) drill into the per-tool details.
 
@@ -99,24 +99,24 @@ Replication mode is also **synchronous vs asynchronous**:
 * **Sync**: writes ack only after replicas confirm. Strong durability, higher latency, **availability gap if a replica is down**.
 * **Async**: writes ack after the leader writes locally. Lower latency, **risk of data loss** on leader failure (the unreplicated tail).
 
-Kafka's `acks=all` + `min.insync.replicas=2` is sync to a quorum. Postgres's `synchronous_commit = on` is sync to one replica. Snowflake's storage layer replicates to S3 (already 11-nines durable) and asynchronously copies across AZs. Different defaults, same dial.
+Kafka's `acks=all` + `min.insync.replicas=2` is sync to a <T>quorum</T>. Postgres's `synchronous_commit = on` is sync to one replica. Snowflake's storage layer replicates to S3 (already 11-nines durable) and asynchronously copies across AZs. Different defaults, same dial.
 
 ### 3. Consensus
 
 > Get a group of nodes to agree on a single value (or a sequence of values) despite failures and message loss.
 
-Consensus is **only needed for state that has one canonical truth**: who's the leader of partition 7, what's the next offset to assign, has this transaction committed? It's not needed for "what value does key X have" if your system tolerates eventual consistency.
+<T>Consensus</T> is **only needed for state that has one canonical truth**: who's the leader of partition 7, what's the next offset to assign, has this transaction committed? It's not needed for "what value does key X have" if your system tolerates <T term="eventual-consistency">eventual consistency</T>.
 
 The two algorithms you'll meet:
 
-* **Paxos** (Lamport, 1989) — the original. Conceptually elegant, notoriously hard to implement correctly. Used in Google Spanner (Multi-Paxos), Chubby.
-* **Raft** (Ongaro & Ousterhout, 2014) — designed to be understandable. Same guarantees as Paxos. Used in etcd, Consul, CockroachDB, TiKV, **Kafka KRaft mode** (post-ZooKeeper, default since 3.3, ZooKeeper removed in Kafka 4.0).
+* **<T>Paxos</T>** (Lamport, 1989) — the original. Conceptually elegant, notoriously hard to implement correctly. Used in Google Spanner (Multi-Paxos), Chubby.
+* **<T>Raft</T>** (Ongaro & Ousterhout, 2014) — designed to be understandable. Same guarantees as Paxos. Used in etcd, Consul, CockroachDB, TiKV, **Kafka KRaft mode** (post-ZooKeeper, default since 3.3, ZooKeeper removed in Kafka 4.0).
 
 Both require a **quorum** (typically `floor(N/2) + 1` of the cluster) to make progress. A 3-node cluster survives 1 failure; a 5-node cluster survives 2. **Even-numbered clusters are wasteful** — a 4-node cluster also tolerates 1 failure but pays for 4 nodes.
 
 The hidden cost: every consensus operation is **at least one network round-trip across a majority**. That's why high-throughput systems (Kafka, Cassandra) push as much as possible **outside** the consensus path — only metadata goes through Raft, the data plane is direct.
 
-> **FLP impossibility (1985).** In a fully asynchronous network with even one faulty process, no deterministic consensus algorithm can guarantee termination. Real systems sidestep this with timeouts and randomized backoff — that's why Raft elections feel slow when the network is flaky.
+> **<T>FLP</T> impossibility (1985).** In a fully asynchronous network with even one faulty process, no deterministic consensus algorithm can guarantee termination. Real systems sidestep this with timeouts and randomized backoff — that's why Raft elections feel slow when the network is flaky.
 
 ### 4. Fault tolerance
 
@@ -147,7 +147,7 @@ The standard tools:
 
 The consistency models, from strongest to weakest:
 
-* **Linearizable (strong)**: every operation appears to take effect at a single point in time, visible to all subsequent reads. Spanner. Single-node Postgres. The default mental model — and the one that doesn't scale geographically without latency cost.
+* **<T term="linearizable">Linearizable</T> (strong)**: every operation appears to take effect at a single point in time, visible to all subsequent reads. Spanner. Single-node Postgres. The default mental model — and the one that doesn't scale geographically without latency cost.
 * **Sequential**: all operations appear in the same order to every observer, but the order may not match wall-clock time.
 * **Causal**: if A causally precedes B (A's effects observed before B starts), every observer sees A before B. Concurrent operations may be reordered.
 * **Read-your-writes**: a client sees its own writes immediately. Other clients may see stale data.
@@ -160,7 +160,7 @@ The consistency models, from strongest to weakest:
 
 ## CAP and PACELC — the trade-off, demystified
 
-The **CAP theorem** (Brewer 2000, formalized Gilbert & Lynch 2002) says: in the presence of a network **P**artition, you must choose between **C**onsistency and **A**vailability. You cannot have all three simultaneously.
+The **<T term="cap">CAP theorem</T>** (Brewer 2000, formalized Gilbert & Lynch 2002) says: in the presence of a network **P**artition, you must choose between **C**onsistency and **A**vailability. You cannot have all three simultaneously.
 
 The misreading: "pick 2 of 3". The correct reading: **partitions are not optional** — they happen in every real network — so the actual choice during a partition is **CP** (refuse writes to preserve consistency) or **AP** (accept writes, reconcile later).
 
@@ -172,7 +172,7 @@ The misreading: "pick 2 of 3". The correct reading: **partitions are not optiona
 | **MongoDB** (`writeConcern: majority`) | CP | A minority partition cannot accept writes. |
 | **etcd / ZooKeeper / Raft cluster** | CP | A minority partition has no leader, full unavailability. |
 
-The blind spot in CAP: it only describes behavior **during a partition**, which is rare. **PACELC** (Daniel Abadi, 2010) extends it: **if Partitioned, choose A or C; Else, choose Latency or Consistency**.
+The blind spot in CAP: it only describes behavior **during a partition**, which is rare. **<T>PACELC</T>** (Daniel Abadi, 2010) extends it: **if Partitioned, choose A or C; Else, choose Latency or Consistency**.
 
 > **PACELC** is what you actually live with day-to-day. Spanner is "PC/EC" — consistent always, at a latency cost. Cassandra is "PA/EL" — fast and available, eventually consistent. DynamoDB defaults to "PA/EL" but you can opt into "PC/EC" per request with strong consistent reads (at 2× the read capacity unit cost).
 
@@ -330,7 +330,7 @@ With `acks=all` + `min.insync.replicas=2` on a topic with replication factor 3, 
 * **Assuming clocks are synchronized.** NTP is good to ~10ms in a datacenter, ~100ms across the internet, and it can run backward during a leap second. **Never use wall-clock time as a tiebreaker for distributed ordering** — use logical clocks (Lamport, vector) or a TrueTime-style API. The 2012 Cloudflare outage from a leap second is the canonical war story.
 * **Picking quorum size by gut feel.** `replication_factor=2, min_isr=2` looks safe but tolerates **zero failures** — losing one node makes the cluster unavailable. The minimum sane setup is `RF=3, min_isr=2`: tolerates one failure, still consistent.
 * **Confusing CAP "AP" with "no consistency".** AP systems (Cassandra, DynamoDB) offer **tunable** consistency — the default may be eventual, but you can read with `QUORUM` or `STRONG` per query. Choosing AP doesn't mean accepting wrong data, it means accepting the trade-off **per operation**.
-* **Forgetting that "exactly-once" is end-to-end, not per-system.** Kafka's exactly-once works **within Kafka** (producer → broker → consumer with transactions). The moment your sink is a non-transactional system (HTTP endpoint, Redis without idempotency, S3 without conditional puts), you're back to at-least-once. See [Kafka delivery semantics](../data-pipeline/kafka).
+* **Forgetting that "<T>exactly-once</T>" is end-to-end, not per-system.** Kafka's exactly-once works **within Kafka** (producer → broker → consumer with transactions). The moment your sink is a non-transactional system (HTTP endpoint, Redis without <T>idempotency</T>, S3 without conditional puts), you're back to at-least-once. See [Kafka delivery semantics](../data-pipeline/kafka).
 * **Hot partitions from monotonic keys.** Hash-partitioning by `created_at` or an auto-increment ID concentrates all new writes on one partition. The result: 1 of N nodes is at 100% CPU, the other N-1 are idle. The fix is a **bucketed prefix** (`bucket(id, 16) || created_at`) or a different partitioning strategy entirely.
 * **Split brain after a partition heal.** Two nodes both believe they're the leader, both accept writes, partition heals, you have divergent state. Consensus systems (Raft, Paxos) prevent this by requiring a quorum to elect a leader. Manual failover scripts (`promote_replica.sh`) reliably create split brain unless they fence the old primary.
 * **Operating an even-number cluster.** A 4-node etcd cluster tolerates 1 failure (same as 3 nodes) but costs 33% more and has a worse partition-tolerance profile. **Always odd-numbered** for consensus clusters.
