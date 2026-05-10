@@ -8,7 +8,11 @@ const sidebars = {
       type: 'category',
       label: 'Fundamentals',
       collapsed: false,
-      items: ['fundamentals/olap-vs-oltp', 'fundamentals/distributed-systems'],
+      items: [
+        'fundamentals/olap-vs-oltp',
+        'fundamentals/distributed-systems',
+        'fundamentals/batch-vs-streaming',
+      ],
     },
     {
       type: 'category',
