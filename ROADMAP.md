@@ -38,6 +38,7 @@ Ordre recommandé, max ROI :
 ## 🧱 Fundamentals
 
 - [x] ⭐ `docs/fundamentals/olap-vs-oltp.md` — workloads, storage layout, HTAP
+- [x] ⭐ `docs/fundamentals/distributed-systems.md` — partitioning, replication, consensus, CAP/PACELC, consistency models
 - [ ] ⭐ `docs/fundamentals/etl-vs-elt.md` — pattern moderne, cadrage du pipeline
 - [ ] `docs/fundamentals/batch-vs-streaming.md` — quand chacun gagne
 
