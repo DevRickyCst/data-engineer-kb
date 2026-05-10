@@ -190,6 +190,25 @@ If you can't hit the lower bound for a concept page, the topic is probably under
 * Never wrap up with "In conclusion…" or "Hopefully this helps".
 * Never add a "Last updated" date — git history is the source of truth.
 
+### 4.6 The `<T>` glossary component
+
+Recurring jargon-heavy terms (quorum, ISR, watermark, MVCC, BCNF, FLP, PACELC, Raft, exactly-once, etc.) are wrapped with the `<T>` MDX component, which renders a dotted-underlined link with a hover tooltip pulling the definition from `src/glossary.js` and a click-through to the glossary anchor in `docs/glossary.md`.
+
+* `<T>quorum</T>` — looks up the term from children text (case-insensitive)
+* `<T term="exactly-once">exactly-once delivery</T>` — explicit lookup key, custom display text
+* The component is **globally registered** via `src/theme/MDXComponents.js` — no per-page import.
+
+**Convention when writing pages:**
+
+1. **Wrap only the first occurrence per page.** Every wrap after that is noise.
+2. **Don't wrap inside headings** — breaks the auto-generated anchor.
+3. **Don't wrap inside code blocks or inline code.**
+4. **Don't wrap inside an existing markdown link** — `[<T>quorum</T>](...)` doesn't compose.
+5. **Wrapping inside `**bold**` is fine** — `**<T>PACELC</T>**` renders correctly.
+6. **Avoid wrapping in tables when the term is the only content of a cell** — visually noisy.
+
+**Adding a new term:** add an entry in `src/glossary.js` with `term`, `definition` (1-3 plain-text sentences, no markdown), then add a matching `## Display name {#slug}` heading in `docs/glossary.md`. The slug, the JS key, and the `<T>` lookup must all match exactly.
+
 ---
 
 ## 5. Pattern matching — read before you write

@@ -118,6 +118,13 @@ Ordre recommandé, max ROI :
 - [ ] Plugin de **search local** (`@easyops-cn/docusaurus-search-local`)
 - [ ] Page `/about` ou `/contact`
 
+## 🧰 Tooling / DX
+
+- [x] Glossary system with hover tooltips (`<T>` MDX component, `src/glossary.js`, `docs/glossary.md`)
+- [ ] Auto-generate `docs/glossary.md` from `src/glossary.js` (pre-build script) — defer until drift becomes a problem
+- [ ] CI check that every `src/glossary.js` key has a matching anchor in `docs/glossary.md`
+- [ ] Roll out `<T>` wrapping across all existing pages (currently only on `distributed-systems.md` and `batch-vs-streaming.md`)
+
 ---
 
 ## 📋 Notes

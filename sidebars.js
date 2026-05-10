@@ -62,6 +62,7 @@ const sidebars = {
       collapsed: false,
       items: ['quality/idempotency-and-backfills'],
     },
+    'glossary',
   ],
 
   interviewSidebar: [
