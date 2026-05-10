@@ -100,7 +100,7 @@ flowchart TD
 - Grâce aux stats min/max, il sait quels row groups contiennent potentiellement les rows recherchés → il **skippe** les autres.
 - Pour chaque row group survivant, il ne charge que les **column chunks** projetés.
 
-C'est le fondement du **predicate pushdown** et de la **column projection**.
+C'est le fondement du **<T term="predicate-pushdown">predicate pushdown</T>** et de la **column projection**.
 
 ---
 

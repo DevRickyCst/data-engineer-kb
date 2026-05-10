@@ -41,7 +41,7 @@ Profile:
 * **Reads/writes per query**: millions to billions of rows scanned.
 * **Latency target**: seconds to minutes.
 * **Concurrency**: tens to a few hundred concurrent users.
-* **ACID**: eventual consistency is usually fine; queries are read-only.
+* **ACID**: <T term="eventual-consistency">eventual consistency</T> is usually fine; queries are read-only.
 * **Workload mix**: 95%+ reads, batched or streamed writes from upstream.
 * **Typical engines**: Snowflake, BigQuery, Redshift, Databricks SQL, ClickHouse, DuckDB, Trino on Iceberg/Delta.
 
@@ -87,7 +87,7 @@ SELECT SUM(amount) FROM events WHERE country = 'FR';
 ```
 
 * **Row store**: read every row (all columns) → filter on `country` → sum `amount`. Touches the full row width × N rows.
-* **Columnar**: read only `country` and `amount` → vectorized SIMD comparison + sum. Touches ~16 bytes × N rows for two `BIGINT`/`DOUBLE` columns.
+* **Columnar**: read only `country` and `amount` → <T>vectorized</T> SIMD comparison + sum. Touches ~16 bytes × N rows for two `BIGINT`/`DOUBLE` columns.
 
 On 100M rows × 30 columns, columnar reads ~10% of the bytes a row store reads. Compression makes the gap wider — homogeneous columns (all dates, all country codes) compress 5–20× better than mixed rows.
 
@@ -113,7 +113,7 @@ Trying to run 50k point-lookups/s on Snowflake costs 100× more and runs 10× sl
 ### Schema — normalized vs denormalized
 
 * **OLTP**: 3NF or higher. One fact, one place. Updates touch one row.
-* **OLAP**: star or snowflake schema, often **denormalized to the point of redundancy**. Joins are cheap if dimensions are small; full denormalization (One Big Table) is increasingly common in cloud warehouses.
+* **OLAP**: star or snowflake schema, often **denormalized to the point of redundancy**. Joins are cheap if dimensions are small; full denormalization (<T term="obt">One Big Table</T>) is increasingly common in cloud warehouses.
 
 A page on this lives at [Normalization](../data-modeling/normalization) and [Star vs Snowflake](../data-modeling/star-vs-snowflake).
 

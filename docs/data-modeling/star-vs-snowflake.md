@@ -260,11 +260,11 @@ GROUP BY department, category;
 ```
 
 - ✅ Zero joins.
-- ✅ Trivial for BI tools, fast on columnar storage with predicate pushdown.
+- ✅ Trivial for BI tools, fast on columnar storage with <T term="predicate-pushdown">predicate pushdown</T>.
 - ❌ Storage cost balloons (every row repeats every dim attribute).
 - ❌ Updating a dim attribute means rewriting the whole fact.
 
-OBT is the "nuclear option" — fast queries, painful maintenance. Reserved for **dashboard-fronted marts** where the read path dominates and dim updates are rare.
+<T>OBT</T> is the "nuclear option" — fast queries, painful maintenance. Reserved for **dashboard-fronted marts** where the read path dominates and dim updates are rare.
 
 ### Galaxy / Fact constellation
 

@@ -21,7 +21,7 @@ A daily `SELECT * FROM orders WHERE updated_at >= ?` is the entry-level pattern.
 
 - **Hard deletes are invisible.** A row deleted in the source stays forever in the warehouse — orphan records, broken counts.
 - **Soft deletes are missed** if no one set `deleted_at`.
-- **Clock skew** between the app and the DB makes the `updated_at` watermark unreliable. An overlap window is a band-aid, not a fix.
+- **Clock skew** between the app and the DB makes the `updated_at` <T>watermark</T> unreliable. An overlap window is a band-aid, not a fix.
 - **Polling load.** At 20k writes/s, a 5-minute poll scans 6M changed rows just to find what moved.
 - **Latency floor.** Best case: the polling interval. Real-time is impossible.
 
@@ -69,7 +69,7 @@ FOR EACH ROW EXECUTE FUNCTION audit_orders();
 
 ### 3. Log-based CDC
 
-You read the database's own write-ahead log — the same mechanism the DB uses for crash recovery and replication.
+You read the database's own <T term="wal">write-ahead log</T> — the same mechanism the DB uses for crash recovery and replication.
 
 | DB         | Log mechanism                                  |
 | ---------- | ---------------------------------------------- |
@@ -276,8 +276,8 @@ The schema registry is the **second line of defense**. The first is CI on the so
 
 Debezium itself is **at-least-once** — on connector restart, it may re-emit a few events from the last committed log position. Your downstream must handle duplicates.
 
-End-to-end exactly-once requires:
-- **Idempotent sinks.** A `MERGE` keyed on the source primary key is naturally idempotent.
+End-to-end <T>exactly-once</T> requires:
+- **<T term="idempotency">Idempotent</T> sinks.** A `MERGE` keyed on the source primary key is naturally idempotent.
 - **Iceberg / Delta sinks** with the upsert keyed on `(pk, source.lsn)` — the LSN gives you a tiebreaker for late events.
 - **No mid-pipeline transforms that aren't deterministic.** `now()`, random sampling, calls to external APIs all break replay.
 

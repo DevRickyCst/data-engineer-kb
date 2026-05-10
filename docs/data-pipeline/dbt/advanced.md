@@ -108,7 +108,7 @@ flowchart TD
 
 ## Snapshots
 
-Les snapshots sont l'implémentation **Type-2 SCD** (cf. [SCD](../../data-modeling/scd)) gérée par dbt. Chaque changement détecté sur une dimension crée un nouveau row avec `dbt_valid_from` / `dbt_valid_to`.
+Les snapshots sont l'implémentation **Type-2 <T>SCD</T>** (cf. [SCD](../../data-modeling/scd)) gérée par dbt. Chaque changement détecté sur une dimension crée un nouveau row avec `dbt_valid_from` / `dbt_valid_to`.
 
 ### Stratégies
 

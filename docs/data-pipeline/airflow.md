@@ -84,7 +84,7 @@ flowchart LR
 
 ## DAG design rules
 
-1. **Idempotent tasks.** Running the same task twice for the same `logical_date` must produce the same output. Use `MERGE`/`INSERT … ON CONFLICT`, not blind `INSERT`.
+1. **<T term="idempotency">Idempotent</T> tasks.** Running the same task twice for the same `logical_date` must produce the same output. Use `MERGE`/`INSERT … ON CONFLICT`, not blind `INSERT`.
 2. **Parameterize on `logical_date`**, never `datetime.now()`. Backfills and reruns depend on it.
 3. **Small, narrow tasks.** A failed 10-minute task is cheaper to retry than a failed 4-hour one.
 4. **Don't put business logic in Python `PythonOperator` callables** that grow unbounded. Move it into a versioned Python package, dbt project, or SQL file.

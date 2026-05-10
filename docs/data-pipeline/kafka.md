@@ -66,7 +66,7 @@ Rule of thumb: choose the key as the **smallest unit you need ordered**. For a b
 | **At-least-once** | May duplicate, never lose (most common)    | Commit offset *after* processing                                      |
 | **Exactly-once**  | No loss, no duplicates                     | Idempotent producer + transactions, **within Kafka**                  |
 
-**Exactly-once is end-to-end only if your sink is idempotent.** Writing to a non-transactional sink (an HTTP endpoint, a cache) breaks the guarantee.
+**<T>Exactly-once</T> is end-to-end only if your sink is <T term="idempotency">idempotent</T>.** Writing to a non-transactional sink (an HTTP endpoint, a cache) breaks the guarantee.
 
 ---
 

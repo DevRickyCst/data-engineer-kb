@@ -139,7 +139,7 @@ You can read these top-down to study, or pick a level and rehearse out loud.
 >
 > 1. **Extract.** Use **CDC if available** (Debezium → Kafka, or the warehouse's native connector). If not, use **incremental SELECT on `updated_at`** with a small overlap window (e.g., 30 min) to handle clock skew. Avoid `SELECT *` from the prod replica during peak hours.
 > 2. **Land.** Write raw, append-only files to S3 in a date-partitioned path: `s3://lake/raw/orders/event_date=YYYY-MM-DD/`. Format: Parquet, one file per task instance.
-> 3. **Stage.** External table or `COPY INTO` a `staging.orders` table in the warehouse. Keep it idempotent — `MERGE` keyed on `(order_id, source_updated_at)`.
+> 3. **Stage.** External table or `COPY INTO` a `staging.orders` table in the warehouse. Keep it <T term="idempotency">idempotent</T> — `MERGE` keyed on `(order_id, source_updated_at)`.
 > 4. **Transform.** dbt models: `stg_orders` → `int_orders_enriched` (join dims) → `fct_orders`. Keep `stg_` 1:1 with source for traceability.
 > 5. **Quality.** dbt tests (`unique`, `not_null`, `relationships`), plus a freshness check on `max(updated_at)` and a row-count anomaly check vs. last 7 days.
 > 6. **Orchestrate.** One Airflow DAG, idempotent on `logical_date`. Partition pruning everywhere. Failures alert to the on-call channel.

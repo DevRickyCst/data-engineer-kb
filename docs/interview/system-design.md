@@ -41,7 +41,7 @@ Always **check in** with the interviewer between phases. The interview is collab
 > Latency? **End-to-end < 10 seconds for dashboards; < 1 minute for billing aggregates.**
 > Retention? **Hot data 30 days, cold data 2 years.**
 > Consumers? **Real-time dashboards, hourly billing, ML feature store, ad-hoc analytics.**
-> Consistency? **Exactly-once for billing, at-least-once is fine for dashboards.**
+> Consistency? **<T>Exactly-once</T> for billing, at-least-once is fine for dashboards.**
 
 ### 2. Estimate
 
@@ -76,7 +76,7 @@ Key decisions:
 
 Billing must not double-count clicks. Approach:
 
-- Producer: idempotent SDK with a client-generated `event_id` (UUID).
+- Producer: <T term="idempotency">idempotent</T> SDK with a client-generated `event_id` (UUID).
 - Kafka: idempotent producer + transactional writes from the stream processor.
 - Stream processor: dedupe on `event_id` within a 24-hour window (RocksDB-backed state).
 - Warehouse merge: `INSERT ... ON CONFLICT DO NOTHING` keyed on `event_id`.
@@ -87,7 +87,7 @@ The dedupe window is the part candidates miss. Without bounded state, the dedup 
 
 - **Kafka cluster outage.** Edge ingest must buffer to disk, retry. Don't drop. SDKs retry with backoff and `event_id` (so retries are safe).
 - **Schema change.** New click field added by mobile team. Schema registry + backward-compat checks in CI block breaking changes.
-- **Late events.** A click logged offline arrives 6 hours later. Stream processor uses event-time windows + watermarks; warehouse partitions are by event_date, so the row lands in the correct partition (with a small re-write).
+- **Late events.** A click logged offline arrives 6 hours later. Stream processor uses event-time windows + <T term="watermark">watermarks</T>; warehouse partitions are by event_date, so the row lands in the correct partition (with a small re-write).
 - **Replay.** If the billing job had a bug, we can re-run from S3 raw for the affected hours. The real-time store is wiped and rebuilt.
 - **Cost growth.** Real-time store is the most expensive. TTL aggressively (7 days hot, then drop). Push older queries to the warehouse.
 - **GDPR / right-to-erasure.** S3 in Iceberg format → row-level deletes. The real-time store is short-TTL anyway, so the request expires naturally.

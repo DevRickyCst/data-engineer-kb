@@ -104,7 +104,7 @@ Practical example: a `course_assignment(course_id, day, teacher_id)` table where
 * A teacher teaches at most one course per day → `(teacher_id, day) → course_id`
 * A course on a given day has one teacher → `(course_id, day) → teacher_id`
 
-Both are candidate keys. The schema is in 3NF but not BCNF if you encode `teacher → department` directly. In production, **3NF is usually enough**; BCNF comes up only when your domain has these overlapping-keys structures.
+Both are candidate keys. The schema is in 3NF but not BCNF if you encode `teacher → department` directly. In production, **3NF is usually enough**; <T>BCNF</T> comes up only when your domain has these overlapping-keys structures.
 
 ### 4NF and beyond
 
@@ -227,7 +227,7 @@ In a warehouse, you typically **denormalize on purpose**:
 
 - **Star schema** — one wide fact table, joined to small dimension tables.
 - **Snowflake schema** — like star, but dimensions are themselves normalized into sub-dimensions.
-- **One Big Table (OBT)** — fully flat, often used in BI tools and modern lakehouses.
+- **One Big Table (<T>OBT</T>)** — fully flat, often used in BI tools and modern lakehouses.
 
 > Long-form on these three: [Star vs Snowflake](./star-vs-snowflake) — including grain, conformed dimensions, and when OBT actually wins.
 

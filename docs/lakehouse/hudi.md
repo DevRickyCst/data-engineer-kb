@@ -84,7 +84,7 @@ Snowflake/BigQuery don't have anything equivalent to "read-optimized" — it's a
 
 ## Native indexes — the upsert accelerator
 
-The other Hudi distinctive: **indexes are first-class**. On upsert, Hudi consults the index to know **which file group contains a given record key** — no full scan, no shuffle.
+The other Hudi distinctive: **indexes are first-class**. On upsert, Hudi consults the index to know **which file group contains a given record key** — no full scan, no <T>shuffle</T>.
 
 | Index type | What it does | When to use |
 |---|---|---|

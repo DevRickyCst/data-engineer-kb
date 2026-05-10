@@ -39,7 +39,7 @@ Every operation appends a single **JSON commit file** to `_delta_log/`. The file
 
 To reconstruct table state at a given version, the reader:
 
-1. Finds the latest **checkpoint** (`*.checkpoint.parquet`) — an aggregated snapshot, written every 10 commits by default.
+1. Finds the latest **<T>checkpoint</T>** (`*.checkpoint.parquet`) — an aggregated snapshot, written every 10 commits by default.
 2. Replays JSON commit files **after** that checkpoint up to the target version.
 3. Resolves the live set of files (`add` minus `remove`).
 
@@ -239,7 +239,7 @@ VACUUM events RETAIN 168 HOURS;
 
 **Mid-level answer.** Delta uses periodic **checkpoints** — every 10 commits by default, it writes a `checkpoint.parquet` that aggregates all `add`/`remove` actions up to that point. To reconstruct version N, the reader: (1) finds the latest checkpoint at version `M ≤ N`, (2) loads it as the base state, (3) replays JSON commits `M+1` through `N`, applying each `add` / `remove` action. The result is the live file set.
 
-**Senior answer.** Two important details. First, the `_last_checkpoint` file is a small pointer that lets readers skip a `LIST` of `_delta_log/` — without it, listing thousands of JSON files on S3 dominates planning time. Second, checkpoints are **idempotent and self-contained** — they don't need any prior state, so a corrupt JSON commit file can be skipped if the next checkpoint covers it (with caveats around tombstone retention). Operationally, the checkpoint cadence is a knob: dense checkpoints (every 5 commits) speed reads but cost more on writes; sparse checkpoints (every 50) save on writes but slow planning. For tables with 1000s of commits/hour, drop the cadence to 5 and **run `VACUUM` aggressively** to keep the log size bounded. The opposite extreme — a table with 10 commits/day — can stay on the default and still plan in milliseconds.
+**Senior answer.** Two important details. First, the `_last_checkpoint` file is a small pointer that lets readers skip a `LIST` of `_delta_log/` — without it, listing thousands of JSON files on S3 dominates planning time. Second, checkpoints are **<T>idempotent</T> and self-contained** — they don't need any prior state, so a corrupt JSON commit file can be skipped if the next checkpoint covers it (with caveats around tombstone retention). Operationally, the checkpoint cadence is a knob: dense checkpoints (every 5 commits) speed reads but cost more on writes; sparse checkpoints (every 50) save on writes but slow planning. For tables with 1000s of commits/hour, drop the cadence to 5 and **run `VACUUM` aggressively** to keep the log size bounded. The opposite extreme — a table with 10 commits/day — can stay on the default and still plan in milliseconds.
 
 **Common mistakes.**
 * Saying "Delta replays from version 0" — checkpoints exist precisely to avoid that.
@@ -265,7 +265,7 @@ VACUUM events RETAIN 168 HOURS;
 
 **Follow-ups.**
 * How would you debug a corrupted Delta log?
-* What's the difference between optimistic concurrency in Delta and in Postgres MVCC?
+* What's the difference between optimistic concurrency in Delta and in Postgres <T>MVCC</T>?
 
 ---
 
